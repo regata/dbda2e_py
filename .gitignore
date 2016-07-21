@@ -90,3 +90,6 @@ ENV/
 
 # virtual environment
 .venv/
+
+.DS_Store
+
