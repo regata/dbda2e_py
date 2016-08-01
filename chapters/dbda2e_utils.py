@@ -33,7 +33,8 @@ def plotPost(trace, ax, title, hdi=0.95):
 
     def annotate(theta, prob, ax, hdi=0.95):
         mode_text = 'mode = %.2f' % theta[np.argmax(prob)]
-        ax.annotate(mode_text, xy=(0.85, 0.9), xycoords='axes fraction', fontsize=12)
+        ax.annotate(mode_text, xy=(0.98, 0.9), xycoords='axes fraction', fontsize=12,
+                    horizontalalignment='right')
 
         if not hdi:
             return
