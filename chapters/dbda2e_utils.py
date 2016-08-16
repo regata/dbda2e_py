@@ -29,7 +29,7 @@ def HDIofGrid(probMassVec, credMass=0.95):
         'height': HDIheight
     }
 
-def plotPost(trace, ax, title, hdi=0.95):
+def plotPost(trace, ax, title, hdi=0.95, xlabel=r'$\theta$'):
 
     def annotate(theta, prob, ax, hdi=0.95):
         mode_text = 'mode = %.2f' % theta[np.argmax(prob)]
@@ -46,9 +46,9 @@ def plotPost(trace, ax, title, hdi=0.95):
         ax.plot(hdi_x, hdi_y, marker='.', color='k', ls='')
 
         ax.annotate('%.2f' % hdi_x[0], xy=(hdi_x[0], hdi_y[0]*1.1),
-                    horizontalalignment='center', verticalalignment='bottom', fontsize=12)
+                    horizontalalignment='right', verticalalignment='bottom', fontsize=12)
         ax.annotate('%.2f' % hdi_x[-1], xy=(hdi_x[-1], hdi_y[-1]*1.1),
-                    horizontalalignment='center', verticalalignment='bottom', fontsize=12)
+                    horizontalalignment='left', verticalalignment='bottom', fontsize=12)
 
         hdi_text = '%.0f%% HDI' % (hdi * 100)
         hdi_mid_idx = len(hdi_x) // 2 
@@ -58,5 +58,5 @@ def plotPost(trace, ax, title, hdi=0.95):
     heights, bins, patches = ax.hist(trace, bins=50, color='cornflowerblue', normed=True)
     bins = (bins + (bins[1]-bins[0]))[:-1] # convert to bin centers from bin edges
     ax.set_title(title)
-    ax.set_xlabel(r'$\theta$')
+    ax.set_xlabel(xlabel)
     annotate(bins, heights, ax, hdi)
